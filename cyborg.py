@@ -1,25 +1,38 @@
+import sys
+
+# Twitter Login
+import twitter
 from keys import keys
 
-print keys[0]
+api = twitter.Api(consumer_key=keys[0][1],
+    consumer_secret=keys[1][1],
+    access_token_key=keys[2][1],
+    access_token_secret=keys[3][1])
 
-
-import sys
-import random
+# Get tweets of a CLI arg username
+s = api.GetUserTimeline(screen_name=sys.argv[1])
+statuses = [each.text for each in s]
+ 
+bin = ''
+import unicodedata
+for each in statuses:
+    bin += unicodedata.normalize('NFKD', each).encode('ascii','ignore') + '\n'
 
 # Markov Class object. shout out to @agiliq!!!!
+import random
 class Markov(object):
 
-	def __init__(self, open_file):
+	def __init__(self, bin):
 		self.cache = {}
-		self.open_file = open_file
+		#self.open_file = open_file
 		self.words = self.file_to_words()
 		self.word_size = len(self.words)
 		self.database()
 		
 	
 	def file_to_words(self):
-		self.open_file.seek(0)
-		data = self.open_file.read()
+		#self.open_file.seek(0)
+		data = bin
 		words = data.split()
 		return words
 		
@@ -53,5 +66,5 @@ class Markov(object):
         
         
 #f = open(sys.argv[1])
-#m = Markov(f)
-#print m.generate_markov_text()
+m = Markov(bin)
+print m.generate_markov_text()
