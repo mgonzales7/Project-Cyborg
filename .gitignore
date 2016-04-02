@@ -1,2 +1,6 @@
 keys.py
 *.pyc
+bin/
+include/
+lib/
+.Python

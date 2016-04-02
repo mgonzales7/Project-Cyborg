@@ -1,6 +1,6 @@
-import keys
+from keys import keys
 
-print keys
+print keys[0]
 
 
 import sys
