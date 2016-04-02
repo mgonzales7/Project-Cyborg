@@ -10,7 +10,13 @@ api = twitter.Api(consumer_key=keys[0][1],
     access_token_secret=keys[3][1])
 
 # Get tweets of a CLI arg username
-s = api.GetUserTimeline(screen_name=sys.argv[1])
+## Get max number of tweets
+import json
+#user_res = json.dumps(str(api.GetUser(screen_name=sys.argv[1])))
+#x = json.loads(user_res)
+#print x['statuses_count']
+status_count = int(json.loads(str(api.GetUser(screen_name=sys.argv[1])))['statuses_count'])
+s = api.GetUserTimeline(screen_name=sys.argv[1],count=status_count)
 statuses = [each.text for each in s]
  
 bin = ''
@@ -63,8 +69,6 @@ class Markov(object):
 			w1, w2 = w2, random.choice(self.cache[(w1, w2)])
 		gen_words.append(w2)
 		return ' '.join(gen_words)
-        
-        
-#f = open(sys.argv[1])
+
 m = Markov(bin)
 print m.generate_markov_text()
