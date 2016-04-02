@@ -1,3 +1,4 @@
+import sys
 import random
 
 class Markov(object):	
@@ -49,6 +50,6 @@ class Markov(object):
 		return ' '.join(gen_words)
         
         
-f = open('sotu.txt')
+f = open(sys.argv[1])
 m = Markov(f)
 print m.generate_markov_text()
