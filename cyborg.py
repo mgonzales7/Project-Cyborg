@@ -1,3 +1,8 @@
+import keys
+
+print keys
+
+
 import sys
 import random
 
@@ -47,6 +52,6 @@ class Markov(object):
 		return ' '.join(gen_words)
         
         
-f = open(sys.argv[1])
-m = Markov(f)
-print m.generate_markov_text()
+#f = open(sys.argv[1])
+#m = Markov(f)
+#print m.generate_markov_text()
