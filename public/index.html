@@ -17,17 +17,15 @@
       // tutorial1.js
       var TweetBox = React.createClass({
 
-         getInitialState: function() {
+        getInitialState: function() {
            return {data: []};
-          },
-
+        },
         handleHandleSubmit: function(handle) {
+            console.log(handle.handle);
             $.ajax({
-              url: this.props.url + handle,
+              url: this.props.url + handle.handle,
               dataType: 'json',
               type: 'GET',
-
-             // data: handle,
               success: function(data) {
                 console.log(data);
                 this.setState({data: data});
@@ -57,9 +55,10 @@
 
       var TweetList = React.createClass({
         render: function() {
+          console.log("inside tweetlist component");
           var tweetNodes = this.props.data.map(function(tweet) {
             return (
-              <Tweet handle={tweet.handle} profile_img = {tweet.profile_img}>
+              <Tweet handle={tweet.handle} profileImg={tweet.profile_img}>
                 {tweet.gen_tweet}
               </Tweet>
             );
@@ -82,7 +81,7 @@
 
         handleSubmit: function(e) {
           e.preventDefault();
-          var hxandle = this.state.handle.trim();
+          var handle = this.state.handle.trim();
           if (!handle) {
             return;
           }
@@ -114,7 +113,7 @@
         render: function() {
           return (
             <div className="tweet">
-              <img height = "200px" width = "200px" src = {this.props.profile_img} />
+              <img height = "200px" width = "200px" src = {this.props.profileImg} />
               <h2 className="tweetHandle">
                 {this.props.handle}
               </h2>

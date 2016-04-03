@@ -1,6 +1,7 @@
 import json
 import os
 import time
+import logging
 from flask import Flask, Response, request
 from cyborgapi import cyborg
 
@@ -9,7 +10,9 @@ app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
 
 @app.route('/generate/<handle>', methods=['GET'])
 def cyborg_handler():
-    print handle
+    app.logging.info('Inside handler function')
+    app.logging.error(handle)
+
     newCyborg = cyborg(handle)
     return Response(newCyborg, mimetype='application/json', headers={'Cache-Control': 'no-cache', 'Access-Control-Allow-Origin': '*'})
 
