@@ -73,7 +73,7 @@ h4 {
 }
 
 p, ul {
- margin:0;
+ margin:5px;
 }
 
 ul {
@@ -86,12 +86,14 @@ form{
 }
 
 .iForm{
+  border-radius: 5px;
   height: 32px;
   width: 200px;
   padding-right: 20px;
+  margin:0 5px;
+  text-align: center;
 }
 .myButton {
-  padding-left: 10px; 
   height: 39px;
   -moz-box-shadow:inset 0px 1px 0px 0px #276873;
   -webkit-box-shadow:inset 0px 1px 0px 0px #276873;
@@ -116,6 +118,8 @@ form{
   padding:6px 24px;
   text-decoration:none;
   text-shadow:0px 1px 0px #3d768a;
+   outline:none;
+   margin:0 5px;
 }
 .myButton:hover {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #599bb3));
@@ -127,10 +131,7 @@ form{
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
   background-color:#408c99;
 }
-.myButton:active {
-  position:relative;
-  top:1px;
-}
+
 
 
 .post-container {
