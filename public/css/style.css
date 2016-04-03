@@ -84,12 +84,29 @@ form{
 }
 
 .post-container {
-    margin: 20px 20px 0 0;  
+    margin: 10px 20px 0 0;  
     overflow: auto;
-     border: 5px solid #333;
-     background: rgba(0, 0, 0, .5);
-    
+    border: 5px solid #333;
+    background: rgba(0, 0, 0, .5);
+    box-shadow: 3px 5px black;
+    border-radius: 5px;
+    -webkit-transition: all 250ms;    
+       -moz-transition: all 250ms;
+            transition: all 250ms;    
+
 }
+
+.post-container:hover{
+  box-shadow: 0 0 black;
+  -webkit-transform: translateY(5px);
+    -moz-transform: translateY(5px);
+      transform: translateY(5px);
+
+
+}
+
+
+
 .post-thumb {
     float: left
 }
