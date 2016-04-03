@@ -61,7 +61,11 @@
         },
         componentDidMount: function(){
           this.checkForTweets();
-          setInterval(this.checkForTweets, 5000);
+          this.interval= setInterval(this.checkForTweets, 5000);  
+        },
+        buttonClicked: function(){
+          clearInterval(this.interval)
+          console.log("pausing")
         },
         render: function() {
           return (
@@ -71,7 +75,7 @@
                 
                 <h4>Enter a twitter username to create a tweet</h4>
               </div>
-              <TweetForm onHandleSubmit={this.handleHandleSubmit} />
+              <TweetForm onHandleSubmit={this.handleHandleSubmit} onButtonClicked ={this.buttonClicked} />
               <TweetList data={this.state.data} />    
             </div>
           );
@@ -117,6 +121,10 @@
           this.setState({handle: ''});
         },
 
+        handleClick: function(){
+            this.props.onButtonClicked();
+        },
+
         render: function() {
           return (
             <form className="handleForm" onSubmit={this.handleSubmit}>
@@ -127,6 +135,7 @@
                 onChange={this.handleHandleChange} />
               
               <input type="submit" value="Create" />
+              <button onClick={this.handleClick}>Pause</button>
             </form>
           );
         }
