@@ -39,6 +39,7 @@
             });
         },
         handleHandleSubmit: function(handle){
+            document.getElementById("spinner").style.display = "initial";
             var tweets = [];
             this.setState({data: tweets});
             var updatedURL = this.props.url + handle.handle;
@@ -48,6 +49,7 @@
               dataType: 'json',
               type: 'GET',
               success: function(data) {
+                document.getElementById("spinner").style.display = "none";
                 console.log(data);
                 this.setState({data: data});
               }.bind(this),
@@ -93,6 +95,9 @@
           });
           return (
             <div id="tweets">
+              <div id="load">
+               <img id ="spinner" src = "largeGears.gif"/>
+              </div>
               <div id="list" className="tweetList">
                 <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
                 {tweetNodes}
@@ -137,6 +142,7 @@
               <input className="myButton" type="submit" value="Create" />
               <button className="myButton" onClick={this.handleClick}>Pause</button>
             </form>
+
           );
         }
       });
