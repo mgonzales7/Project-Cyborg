@@ -1,3 +1,6 @@
+# FILEKOV.PY
+## usage: python filekov.py file.txt
+
 import sys
 import random
 

@@ -1,3 +1,6 @@
+# CYBORG.PY
+## usage: python cyborg.py <twitter handle>
+
 import sys
 
 # Twitter Login
