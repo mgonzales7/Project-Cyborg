@@ -1,0 +1,49 @@
+{
+  "name": "react-motion",
+  "version": "0.4.2",
+  "homepage": "https://github.com/chenglou/react-motion",
+  "authors": [
+    "chenglou"
+  ],
+  "description": "A spring that solves your animation problems.",
+  "main": [
+    "build/react-motion.js",
+    "build/react-motion.map"
+  ],
+  "dependencies": {
+    "react": ">=0.13.2 || ^0.14"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "react-component",
+    "transitiongroup",
+    "spring",
+    "tween",
+    "motion",
+    "animation",
+    "transition",
+    "ui"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test",
+    "demo*",
+    "server.js",
+    "src",
+    "webpack.config.js",
+    "webpack.prod.config.js",
+    "karma.conf.js",
+    "package.json"
+  ],
+  "_cacheHeaders": {
+    "Content-Length": "37777",
+    "Content-Type": "application/zip; charset=utf-8"
+  },
+  "_source": "https://npmcdn.com/react-motion/bower.zip",
+  "_target": "*",
+  "_originalSource": "https://npmcdn.com/react-motion/bower.zip",
+  "_direct": true
+}
