@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Cyborg</title>
     <!-- Not present in the tutorial. Just for basic styling. -->
-    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.16/browser.js"></script>
@@ -23,7 +23,7 @@
 
         handleHandleSubmit: function(handle) {
             $.ajax({
-              url: this.props.url + "/" + handle,
+              url: this.props.url + handle,
               dataType: 'json',
               type: 'GET',
 
@@ -45,7 +45,7 @@
 
         render: function() {
           return (
-            <div className="commentBox">
+            <div className="tweetBox">
               <h1>Cyborg</h1>
               <h4>Enter a twitter username to create a tweet</h4>
               <TweetForm onHandleSubmit={this.handleHandleSubmit} />
@@ -57,7 +57,7 @@
 
       var TweetList = React.createClass({
         render: function() {
-          var commentNodes = this.props.data.map(function(tweet) {
+          var tweetNodes = this.props.data.map(function(tweet) {
             return (
               <Tweet handle={tweet.handle} profile_img = {tweet.profile_img}>
                 {tweet.gen_tweet}
@@ -66,7 +66,7 @@
           });
           return (
             <div className="tweetList">
-              {commentNodes}
+              {tweetNodes}
             </div>
           );
         }
@@ -124,10 +124,8 @@
         }
       });
 
-
-
       ReactDOM.render(
-        <TweetBox url="/generate" />,
+        <TweetBox url="/generate/" />,
         document.getElementById('content')
       );
     </script>
