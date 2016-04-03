@@ -18,7 +18,9 @@ import json
 #user_res = json.dumps(str(api.GetUser(screen_name=sys.argv[1])))
 #x = json.loads(user_res)
 #print x['statuses_count']
-status_count = int(json.loads(str(api.GetUser(screen_name=sys.argv[1])))['statuses_count'])
+handle = sys.argv[1]
+profile_img = json.loads(str(api.GetUser(screen_name=handle)))['profile_image_url']
+status_count = int(json.loads(str(api.GetUser(screen_name=handle)))['statuses_count'])
 s = api.GetUserTimeline(screen_name=sys.argv[1],count=status_count)
 statuses = [each.text for each in s]
  
@@ -74,4 +76,10 @@ class Markov(object):
 		return ' '.join(gen_words)
 
 m = Markov(bin)
-print m.generate_markov_text()
+payload = {
+    'handle': handle,
+    'profile_img': profile_img,
+    'gen_tweet': m.generate_markov_text(),
+}
+
+print json.dumps(payload)
