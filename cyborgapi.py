@@ -2,6 +2,8 @@
 ## usage: from cyborg-api import cyborg
 def cyborg(handle):
     import sys
+    import calendar
+    import time
 
     # Twitter Login
     import twitter
@@ -76,7 +78,9 @@ def cyborg(handle):
             return ' '.join(gen_words)
 
     m = Markov(bin)
+    uniqueID = calendar.timegm(time.gmtime())
     payload = {
+        'id': uniqueID,
         'handle': handle,
         'profile_img': profile_img,
         'gen_tweet': m.generate_markov_text(),

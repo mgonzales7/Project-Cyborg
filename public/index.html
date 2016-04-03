@@ -29,7 +29,7 @@
               type: 'GET',
               success: function(data) {
                 console.log(data);
-                this.setState({data: data});
+                this.setState({data: [data]});
               }.bind(this),
               error: function(xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -57,9 +57,10 @@
       var TweetList = React.createClass({
         render: function() {
           console.log("inside tweetlist component");
+          console.log(this.props.data);
           var tweetNodes = this.props.data.map(function(tweet) {
             return (
-              <Tweet handle={tweet.handle} profileImg={tweet.profile_img}>
+              <Tweet handle={tweet.handle} profileImg={tweet.profile_img} key={tweet.id}>
                 {tweet.gen_tweet}
               </Tweet>
             );
@@ -114,7 +115,7 @@
         render: function() {
           return (
             <div className="tweet">
-              <img height = "200px" width = "200px" src = {this.props.profileImg} />
+              <img height = "40px" width = "40px" src = {this.props.profileImg} />
               <h2 className="tweetHandle">
                 {this.props.handle}
               </h2>
