@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cyborg</title>
+    <!-- Not present in the tutorial. Just for basic styling. -->
+    <link rel="stylesheet" href="css/base.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.16/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/babel">
+      // tutorial1.js
+      var TweetBox = React.createClass({
+
+         getInitialState: function() {
+           return {data: []};
+          },
+
+        handleHandleSubmit: function(handle) {
+            $.ajax({
+              url: this.props.url,
+              dataType: 'json',
+              type: 'GET',
+              data: handle,
+              success: function(data) {
+                console.log(data);
+                this.setState({data: data});
+              }.bind(this),
+              error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+              }.bind(this)
+            });
+        },
+
+        getInitialState: function() {
+          return {data: []};
+        },
+
+
+        render: function() {
+          return (
+            <div className="commentBox">
+              <h1>Cyborg</h1>
+              <h4>Enter a twitter username to create a tweet</h4>
+              <TweetForm onHandleSubmit={this.handleHandleSubmit} />
+              <TweetList data={this.state.data} />    
+            </div>
+          );
+        }
+      });
+
+      var TweetList = React.createClass({
+        render: function() {
+          var commentNodes = this.props.data.map(function(tweet) {
+            return (
+              <Tweet handle={tweet.handle} profile_img = {tweet.profile_img}>
+                {tweet.gen_tweet}
+              </Tweet>
+            );
+          });
+          return (
+            <div className="tweetList">
+              {commentNodes}
+            </div>
+          );
+        }
+      });
+
+      var TweetForm = React.createClass({
+        getInitialState: function() {
+          return {handle: ''};
+        },
+        handleHandleChange: function(e) {
+          this.setState({handle: e.target.value});
+        },
+
+        handleSubmit: function(e) {
+          e.preventDefault();
+          var hxandle = this.state.handle.trim();
+          if (!handle) {
+            return;
+          }
+          this.props.onHandleSubmit({handle: handle});
+          this.setState({handle: ''});
+        },
+
+        render: function() {
+          return (
+            <form className="handleForm" onSubmit={this.handleSubmit}>
+              <input
+                type="text"
+                placeholder="Username"
+                value={this.state.handle}
+                onChange={this.handleHandleChange} />
+              
+              <input type="submit" value="Create" />
+            </form>
+          );
+        }
+      });
+
+      var Tweet= React.createClass({
+       rawMarkup: function() {
+          var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+          return { __html: rawMarkup };
+        },
+
+        render: function() {
+          return (
+            <div className="tweet">
+              <img height = "200px" width = "200px" src = {this.props.profile_img} />
+              <h2 className="tweetHandle">
+                {this.props.handle}
+              </h2>
+              <span dangerouslySetInnerHTML={this.rawMarkup()} />
+            </div>
+          );
+        }
+      });
+
+
+
+      ReactDOM.render(
+        <TweetBox url="/generate" />,
+        document.getElementById('content')
+      );
+    </script>
+  </body>
+</html>
