@@ -5,15 +5,20 @@
     <title>Cyborg</title>
     <!-- Not present in the tutorial. Just for basic styling. -->
     <link rel="stylesheet" href="css/style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0-rc.2/react-with-addons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.16/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js"></script>
   </head>
   <body>
     <div id="content"></div>
     <script type="text/babel">
+
+   
+    var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
       var TweetBox = React.createClass({
         getInitialState: function() {
            return {data: []};
@@ -56,17 +61,21 @@
         },
         componentDidMount: function(){
           this.checkForTweets();
-          setInterval(this.checkForTweets, 5000);
+          this.interval= setInterval(this.checkForTweets, 5000);  
+        },
+        buttonClicked: function(){
+          clearInterval(this.interval)
+          console.log("pausing")
         },
         render: function() {
           return (
             <div id="all" className="tweetBox">
               <div id ="header">
-                <h1>Cyborg <img height="50px" width = "50px" src="twitterBot.png"/></h1>
+                <h1>Project <img height="80px" width = "80px" src="twitterBot.png"/>Cyborg </h1>
                 
-                <h4>Enter a twitter username to create a tweet</h4>
+                <h4>Enter a twitter username to create tweets</h4>
               </div>
-              <TweetForm onHandleSubmit={this.handleHandleSubmit} />
+              <TweetForm onHandleSubmit={this.handleHandleSubmit} onButtonClicked ={this.buttonClicked} />
               <TweetList data={this.state.data} />    
             </div>
           );
@@ -85,7 +94,9 @@
           return (
             <div id="tweets">
               <div id="list" className="tweetList">
+                <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
                 {tweetNodes}
+                </ReactCSSTransitionGroup>
               </div>
             </div>
           );
@@ -110,16 +121,21 @@
           this.setState({handle: ''});
         },
 
+        handleClick: function(){
+            this.props.onButtonClicked();
+        },
+
         render: function() {
           return (
             <form className="handleForm" onSubmit={this.handleSubmit}>
-              <input
+              <input className="iForm"
                 type="text"
                 placeholder="Username"
                 value={this.state.handle}
                 onChange={this.handleHandleChange} />
               
-              <input type="submit" value="Create" />
+              <input className="myButton" type="submit" value="Create" />
+              <button className="myButton" onClick={this.handleClick}>Pause</button>
             </form>
           );
         }
