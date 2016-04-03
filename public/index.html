@@ -71,7 +71,7 @@
           return (
             <div id="all" className="tweetBox">
               <div id ="header">
-                <h1>Project <img height="50px" width = "50px" src="twitterBot.png"/> Cyborg </h1>
+                <h1>Project <img height="50px" width = "50px" src="twitterBot.png"/>Cyborg </h1>
                 
                 <h4>Enter a twitter username to create a tweet</h4>
               </div>
@@ -128,14 +128,14 @@
         render: function() {
           return (
             <form className="handleForm" onSubmit={this.handleSubmit}>
-              <input
+              <input className="iForm"
                 type="text"
                 placeholder="Username"
                 value={this.state.handle}
                 onChange={this.handleHandleChange} />
               
-              <input type="submit" value="Create" />
-              <button onClick={this.handleClick}>Pause</button>
+              <input className="myButton" type="submit" value="Create" />
+              <button className="myButton" onClick={this.handleClick}>Pause</button>
             </form>
           );
         }
