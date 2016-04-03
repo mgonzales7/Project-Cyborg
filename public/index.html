@@ -15,7 +15,6 @@
     <div id="content"></div>
     <script type="text/babel">
       var TweetBox = React.createClass({
-
         getInitialState: function() {
            return {data: []};
         },
@@ -61,9 +60,12 @@
         },
         render: function() {
           return (
-            <div className="tweetBox">
-              <h1>Cyborg</h1>
-              <h4>Enter a twitter username to create a tweet</h4>
+            <div id="all" className="tweetBox">
+              <div id ="header">
+                <h1>Cyborg <img height="50px" width = "50px" src="twitterBot.png"/></h1>
+                
+                <h4>Enter a twitter username to create a tweet</h4>
+              </div>
               <TweetForm onHandleSubmit={this.handleHandleSubmit} />
               <TweetList data={this.state.data} />    
             </div>
@@ -81,8 +83,10 @@
             );
           });
           return (
-            <div className="tweetList">
-              {tweetNodes}
+            <div id="tweets">
+              <div id="list" className="tweetList">
+                {tweetNodes}
+              </div>
             </div>
           );
         }
@@ -129,12 +133,12 @@
 
         render: function() {
           return (
-            <div className="tweet">
-              <img height = "40px" width = "40px" src = {this.props.profileImg} />
-              <h2 className="tweetHandle">
-                {this.props.name} @{this.props.handle}
-              </h2>
-              <span dangerouslySetInnerHTML={this.rawMarkup()} />
+            <div className="post-container tweet">                
+                <div className="post-thumb"> <img height = "60px" width = "60px" src = {this.props.profileImg} /></div>
+                <div className="post-content tweetHandle">
+                    <p className="post-title">{this.props.name} @{this.props.handle}</p>
+                    <p><span dangerouslySetInnerHTML={this.rawMarkup()} /></p>
+               </div>
             </div>
           );
         }
