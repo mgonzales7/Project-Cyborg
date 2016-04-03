@@ -31,11 +31,9 @@ def cyborg_handler(handle):
     print 'currentHandle is', currentHandle
     print 'handle is', handle
 
-    #reset the tweets list if new handle
-    if str(handle) != str(currentHandle):
-        currentHandle = handle
-        with open('tweets.json','w') as file:
-            file.write('[\n]')
+    currentHandle = handle
+    with open('tweets.json','w') as file:
+        file.write('[\n]')
 
     tweets = addNewTweet()
 

@@ -79,17 +79,31 @@ p, ul {
 ul {
   padding-left: 30px;
 }
+
 form{
   text-align: center;
 }
 
 .post-container {
-    margin: 20px 20px 0 0;  
+    margin: 10px 20px 0 0;  
     overflow: auto;
-     border: 5px solid #333;
-     background: rgba(0, 0, 0, .5);
-    
+    border: 5px solid #333;
+    background: rgba(0, 0, 0, .5);
+    box-shadow: 2px 5px black;
+    border-radius: 5px;
+    -webkit-transition: all 250ms;    
+       -moz-transition: all 250ms;
+            transition: all 250ms;    
+
 }
+
+.post-container:hover{
+  box-shadow: 0 0 black;
+  -webkit-transform: translate(2px,5px);
+    -moz-transform: translate(2px,5px);
+      transform: translate(2px,5px);
+}
+
 .post-thumb {
     float: left
 }
@@ -106,8 +120,23 @@ form{
   font-style: bold;
 }
 
+.example-enter {
+  opacity: 0.01;
+}
 
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
 
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
 
 #tweets{
   color: white;
@@ -115,8 +144,4 @@ form{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  
-  
-
 }
-
