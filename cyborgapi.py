@@ -21,6 +21,7 @@ def cyborg(handle):
     #x = json.loads(user_res)
     #print x['statuses_count']
     handle = handle
+    name = json.loads(str(api.GetUser(screen_name=handle)))['name']
     profile_img = json.loads(str(api.GetUser(screen_name=handle)))['profile_image_url']
     status_count = int(json.loads(str(api.GetUser(screen_name=handle)))['statuses_count'])
     s = api.GetUserTimeline(screen_name=handle,count=status_count)
@@ -81,6 +82,7 @@ def cyborg(handle):
     uniqueID = calendar.timegm(time.gmtime())
     payload = {
         'id': uniqueID,
+        'name': name,
         'handle': handle,
         'profile_img': profile_img,
         'gen_tweet': m.generate_markov_text(),

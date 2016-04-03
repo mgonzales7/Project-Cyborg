@@ -14,13 +14,29 @@
   <body>
     <div id="content"></div>
     <script type="text/babel">
-      // tutorial1.js
       var TweetBox = React.createClass({
 
         getInitialState: function() {
            return {data: []};
         },
-        handleHandleSubmit: function(handle) {
+        checkForTweets: function() {
+            console.log('in checkfortweets!');
+            $.ajax({
+              url: '/current',
+              dataType: 'json',
+              cache: false,
+              success: function(data) {
+                console.log(data);
+                this.setState({data: data});
+              }.bind(this),
+              error: function(xhr, status, err){
+                console.error('/current',status,err.toString());
+              }.bind(this)
+            });
+        },
+        handleHandleSubmit: function(handle){
+            var tweets = [];
+            this.setState({data: tweets});
             var updatedURL = this.props.url + handle.handle;
             console.log(updatedURL);
             $.ajax({
@@ -29,19 +45,20 @@
               type: 'GET',
               success: function(data) {
                 console.log(data);
-                this.setState({data: [data]});
+                this.setState({data: data});
               }.bind(this),
               error: function(xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
               }.bind(this)
             });
         },
-
         getInitialState: function() {
           return {data: []};
         },
-
-
+        componentDidMount: function(){
+          this.checkForTweets();
+          setInterval(this.checkForTweets, 5000);
+        },
         render: function() {
           return (
             <div className="tweetBox">
@@ -56,11 +73,9 @@
 
       var TweetList = React.createClass({
         render: function() {
-          console.log("inside tweetlist component");
-          console.log(this.props.data);
           var tweetNodes = this.props.data.map(function(tweet) {
             return (
-              <Tweet handle={tweet.handle} profileImg={tweet.profile_img} key={tweet.id}>
+              <Tweet name={tweet.name} handle={tweet.handle} profileImg={tweet.profile_img} key={tweet.id}>
                 {tweet.gen_tweet}
               </Tweet>
             );
@@ -117,7 +132,7 @@
             <div className="tweet">
               <img height = "40px" width = "40px" src = {this.props.profileImg} />
               <h2 className="tweetHandle">
-                {this.props.handle}
+                {this.props.name} @{this.props.handle}
               </h2>
               <span dangerouslySetInnerHTML={this.rawMarkup()} />
             </div>
