@@ -23,10 +23,11 @@
 
         handleHandleSubmit: function(handle) {
             $.ajax({
-              url: this.props.url,
+              url: this.props.url + "/" + handle,
               dataType: 'json',
               type: 'GET',
-              data: handle,
+
+             // data: handle,
               success: function(data) {
                 console.log(data);
                 this.setState({data: data});
