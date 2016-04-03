@@ -1,4 +1,4 @@
-# CYBORG-api.PY
+# CYBORGAPI.PY
 ## usage: from cyborg-api import cyborg
 def cyborg(handle):
     import sys
@@ -21,7 +21,7 @@ def cyborg(handle):
     handle = handle
     profile_img = json.loads(str(api.GetUser(screen_name=handle)))['profile_image_url']
     status_count = int(json.loads(str(api.GetUser(screen_name=handle)))['statuses_count'])
-    s = api.GetUserTimeline(screen_name=sys.argv[1],count=status_count)
+    s = api.GetUserTimeline(screen_name=handle,count=status_count)
     statuses = [each.text for each in s]
     
     bin = ''
