@@ -15,8 +15,7 @@
   <body>
     <div id="content"></div>
     <script type="text/babel">
-
-   
+    var isIntervalSet = false;   
     var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
       var TweetBox = React.createClass({
@@ -42,7 +41,8 @@
             document.getElementById("spinner").style.display = "initial";
             var tweets = [];
             this.setState({data: tweets});
-            var updatedURL = this.props.url + handle.handle;
+            var updatedHandle = handle.handle.replace(/@/,'').trim();
+            var updatedURL = this.props.url + updatedHandle;
             console.log(updatedURL);
             $.ajax({
               url: updatedURL,
@@ -51,6 +51,12 @@
               success: function(data) {
                 document.getElementById("spinner").style.display = "none";
                 console.log(data);
+                console.log("isIntervalSet: ", isIntervalSet);
+                if(!isIntervalSet){
+                  this.interval = setInterval(this.checkForTweets, 5000);
+                  isIntervalSet = true;
+                }
+                console.log("about to setState");
                 this.setState({data: data});
               }.bind(this),
               error: function(xhr, status, err) {
@@ -63,11 +69,16 @@
         },
         componentDidMount: function(){
           this.checkForTweets();
-          this.interval= setInterval(this.checkForTweets, 5000);  
+          this.interval= setInterval(this.checkForTweets, 5000); 
+          isIntervalSet = true;
+          console.log("isIntervalSet: ", isIntervalSet);
         },
         buttonClicked: function(){
-          clearInterval(this.interval)
-          console.log("pausing")
+          if(isIntervalSet){
+            clearInterval(this.interval);
+            isIntervalSet = false;
+            console.log("isIntervalSet: ", isIntervalSet);
+          }
         },
         render: function() {
           return (
