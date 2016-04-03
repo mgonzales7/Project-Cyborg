@@ -21,9 +21,10 @@
            return {data: []};
         },
         handleHandleSubmit: function(handle) {
-            console.log(handle.handle);
+            var updatedURL = this.props.url + handle.handle;
+            console.log(updatedURL);
             $.ajax({
-              url: this.props.url + handle.handle,
+              url: updatedURL,
               dataType: 'json',
               type: 'GET',
               success: function(data) {

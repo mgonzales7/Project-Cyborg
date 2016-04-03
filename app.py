@@ -1,19 +1,20 @@
 import json
 import os
 import time
-import logging
 from flask import Flask, Response, request
 from cyborgapi import cyborg
 
 app = Flask(__name__, static_url_path='', static_folder='public')
+app.config["DEBUG"] = True
 app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
 
 @app.route('/generate/<handle>', methods=['GET'])
-def cyborg_handler():
-    app.logging.info('Inside handler function')
-    app.logging.error(handle)
+def cyborg_handler(handle):
+    print 'Inside handler function'
+    print handle
 
     newCyborg = cyborg(handle)
+    print newCyborg
     return Response(newCyborg, mimetype='application/json', headers={'Cache-Control': 'no-cache', 'Access-Control-Allow-Origin': '*'})
 
 if __name__ == '__main__':
