@@ -1,7 +1,9 @@
 # PROJECT CYBORG
 ##Turn anyone with a Twitter handle into a Twitter Bot!
 
-![Project Cyborg Demo](https://raw.githubusercontent.com/kennydurkin/Project-Cyborg/master/cyborg.gif)
+###[Deep Drumpf](https://twitter.com/deepdrumpf)|###[Sad Server](https://twitter.com/sadserver)
+:---------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------:
+![](https://raw.githubusercontent.com/kennydurkin/Project-Cyborg/master/cyborg.gif)|![](https://raw.githubusercontent.com/kennydurkin/Project-Cyborg/master/cyborg2.gif)
 
 Uses Markov Chains to generate output based on a specific user's tweet. Built using a React.JS frontend and a Python Flask backend.
 

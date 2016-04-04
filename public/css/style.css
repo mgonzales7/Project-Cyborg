@@ -179,7 +179,7 @@ form{
     margin: 10px 20px 0 0;  
     overflow: auto;
     border: 5px solid #333;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .85);
     box-shadow: 2px 5px black;
     border-radius: 5px;
     -webkit-transition: all 250ms;    
